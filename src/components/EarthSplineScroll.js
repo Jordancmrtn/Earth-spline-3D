@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import * as THREE from 'three';
 import '../style/model5.css';
 
-export default function Test(props){
+export default function EarthSplineScroll(props){
   let scene = new THREE.Scene();
   let camera3D = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 10000 );
 
@@ -25,12 +25,11 @@ export default function Test(props){
     renderer.setSize( window.innerWidth, window.innerHeight);
     document.querySelector('#obj-3D').appendChild( renderer.domElement );
 
-    window.addEventListener('resize', handleWindowResize)
-
     initTreeJs(scene,camera3D,renderer).then((res)=>{
       setSpline(res.spline)
       setCameraState(res.camera)
       animate(renderer, res.earth)
+      window.addEventListener('resize',  () => handleWindowResize(renderer, res.camera))
     });
   },[]);
 
@@ -194,11 +193,13 @@ export default function Test(props){
     setText(!text)
   }
 
-  const handleWindowResize = () =>{
+  const handleWindowResize = (renderer, camera) =>{      
     let width = window.innerWidth;
     let height = window.innerHeight;
-    camera3D.aspect = width/height;
-    camera3D.updateProjectionMatrix();
+
+    renderer.setSize(width, height)
+    camera.aspect = width/height;
+    camera.updateProjectionMatrix();
   }
 
   return (

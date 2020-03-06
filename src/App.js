@@ -3,7 +3,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-import Model5 from './components/Model5.js';
+import EarthSplineScroll from './components/EarthSplineScroll.js';
 import Loading from './components/Loading.js'
 
 function App() {
@@ -17,7 +17,7 @@ window.addEventListener("load", function(event) {
   return (
     <div className="App" id="app" >
       {loaded ?
-      <Model5 /> : 
+      <EarthSplineScroll /> : 
       <Loading />
       }
     </div>
