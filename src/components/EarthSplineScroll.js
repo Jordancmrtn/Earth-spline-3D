@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as THREE from 'three';
-import '../style/model5.css';
+import '../style/EarthSplineScroll.css';
 
 export default function EarthSplineScroll(props){
   let scene = new THREE.Scene();
@@ -186,6 +186,7 @@ export default function EarthSplineScroll(props){
             </p>
         </div>
         <div id="obj-3D"></div>
+        <p  id="indicator" style={ { opacity: h1Fade ? '0' : '1' } }>Scroll only work on computer for the moment</p>
         <h1 style={ { opacity: h1Fade ? '0' : '1' } }>LA TERRE</h1>
       </div>
       </>

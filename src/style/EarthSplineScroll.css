@@ -37,3 +37,10 @@ h1{
   font-size: 151px;
   transition: 0.5s ease-in-out;
 }
+#indicator{
+  position: fixed;
+  color: rgba(172, 172, 172, 0.199);
+  top: 519px;
+  left: 10px;
+  transition: 0.5s ease-in-out;
+}
