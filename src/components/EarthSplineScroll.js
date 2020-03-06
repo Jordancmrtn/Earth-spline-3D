@@ -6,7 +6,6 @@ export default function EarthSplineScroll(props){
   let scene = new THREE.Scene();
   let camera3D = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 10000 );
 
-
   const [camPosIndex, setcamPosIndex ] = useState(0);
   const [cameraState, setCameraState ] = useState();
   const [spline, setSpline] = useState();
@@ -14,8 +13,6 @@ export default function EarthSplineScroll(props){
   const [text, setText] = useState(false);
   const [h1Fade, setH1Fade] = useState(false);
   const [display, setDisplay] = useState(false)
-
-
 
   useEffect(()=>{
     let renderer = new THREE.WebGLRenderer({ alpha : true, antialias: true});
@@ -37,9 +34,6 @@ export default function EarthSplineScroll(props){
   useEffect(() => {
     if (!cameraState || !spline) return
 
-    let test = spline.getPoints()
-    // console.log(test)
-
     let camPos = spline.getPoint(camPosIndex / 10000)
 
     cameraState.position.x = camPos.x;
@@ -55,7 +49,6 @@ export default function EarthSplineScroll(props){
 
           scene.background = new THREE.Color( 0x000000 )
           var loaderTexture = new THREE.TextureLoader();
-
 
           // *** TERRE ***//
           let geometry = new THREE.SphereGeometry(0.4, 32, 32);
@@ -99,43 +92,15 @@ export default function EarthSplineScroll(props){
             ] 
             //** Create a closed wavey loop **//
             let spline = new THREE.CatmullRomCurve3(splinePoints, false, "chordal");
-            // spline.closed = true;
-
-            // let points = spline.getPoints( 4 );
-
-            // let geometry2 = new THREE.BufferGeometry().setFromPoints( points );
-            // let material2 = new THREE.LineBasicMaterial( { color : 0xff0000, opcity : 0, transparent: true } );
-
-            // // Create the final curve mesh to add to the scene
-            // let curveObject = new THREE.Line( geometry2, material2 );
-            // scene.add(curveObject)
-
-            // // visualize spaced points 
-            // const sphereGeomtry = new THREE.SphereBufferGeometry( 0.1 );
-            // const sphereMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
-
-            // for ( var point of points ){
-            //   const helper = new THREE.Mesh( sphereGeomtry, sphereMaterial );
-            //   helper.position.copy( point );
-            //   scene.add( helper );
-            // }
 
 
           // **** CAMERA SETTINGS *** //
           camera.position.x = -1.9991990685168373;
           camera.position.y = -3.9999988561106123;
           camera.position.z = 2;
-
           camera3D.lookAt(0, 0, 0);
           camera.updateProjectionMatrix();
           camera.updateMatrixWorld();
-
-          // *** HELPERS *** //
-          // let sizeGrid = 20;
-          // let divisions = 20;
-          // let gridHelper = new THREE.GridHelper( sizeGrid, divisions );
-          // scene.add( gridHelper );
-          // scene.add( new THREE.AxesHelper() );
 
           renderer.render( scene, camera );
 
@@ -165,7 +130,6 @@ export default function EarthSplineScroll(props){
       setcamPosIndex(camPosIndex + e.deltaY)
     } 
 
-    console.log(camPosIndex)
 
     if (y > 2900 && y < 3850){
       setDisplay(true)
@@ -180,6 +144,7 @@ export default function EarthSplineScroll(props){
       setTitle(false)
     }
 
+
     if( y > 2670){
       setH1Fade(true)
     } else {
@@ -193,6 +158,7 @@ export default function EarthSplineScroll(props){
     setText(!text)
   }
 
+  //*** ALLOW RESIZING WINDOW ***//
   const handleWindowResize = (renderer, camera) =>{      
     let width = window.innerWidth;
     let height = window.innerHeight;
@@ -225,6 +191,3 @@ export default function EarthSplineScroll(props){
       </>
   )
 };
-
-
-{/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vel mi viverra, dignissim est sit amet, maximus dui. Phasellus eu augue libero. Quisque sodales nisi vel tempor euismod. Quisque at turpis efficitur, pellentesque est sit amet, ultricies metus. Quisque dapibus eget ante at fermentum. Nam hendrerit felis elit, at iaculis nulla lacinia ac. In non enim eu velit pharetra tempus ac quis elit. Nunc iaculis felis ex, in pellentesque mi condimentum nec.</p> */}
